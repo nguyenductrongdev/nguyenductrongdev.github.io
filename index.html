@@ -7,15 +7,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nguyen Duc Trong</title>
     <style>
-        .text-center {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header__title {
             text-align: center;
+            letter-spacing: 0.5vw;
+            word-spacing: 2vw;
+            /* background-color: #2664c7; */
+            background: rgb(9, 9, 121);
+            background: linear-gradient(90deg, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 0.7066176812521884) 64%, rgba(0, 137, 164, 1) 100%);
+            padding: 12px 14px;
+            font-size: 3rem;
+        }
+
+        .main__list-skill {
+            list-style-type: square;
+            margin-left: 50px;
+        }
+
+        .main__title {
+            border-left: solid 1vw red;
+            padding: 1vw 2vw;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 1vw 0;
         }
     </style>
 </head>
 
 <body>
-    <h1>Welcome to my Website</h1>
-    <p>I am Nguyen Duc Trong - web developer</p>
+    <header class="header">
+        <h1 class="header__title">Welcome to my Website</h1>
+    </header>
+
+    <main class="main">
+        <p class="main__title">Information</p>
+        <ul>
+            <li>I am Nguyen Duc Trong - web developer</li>
+            <li>My github: <a href="https://github.com/nguyenductrongdev">nguyenductrongdev</a></li>
+        </ul>
+
+
+
+        <p class="main__title">My skills:</p>
+        <ul class="main__list-skill">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>ReactJS</li>
+            <li>Jquery</li>
+            <li>Bootstrap</li>
+            <li>NodeJS</li>
+            <li>PHP</li>
+            <li>Java</li>
+        </ul>
+    </main>
 </body>
 
 </html>
