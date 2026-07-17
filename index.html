@@ -5,67 +5,1286 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyen Duc Trong</title>
+    <meta name="description" content="Nguyen Duc Trong - backend developer portfolio focused on Java Spring Boot, Node.js, and Python">
+    <title>Nguyen Duc Trong | Backend Developer Profile</title>
     <style>
+        :root {
+            --bg: #070708;
+            --surface: #101113;
+            --surface-2: #15171b;
+            --surface-3: #1a1d22;
+            --line: rgba(255, 255, 255, 0.1);
+            --line-strong: rgba(255, 255, 255, 0.16);
+            --text: #f5f2ef;
+            --muted: #aaa4a4;
+            --dim: #79777a;
+            --red: #d13b48;
+            --red-dark: #78151f;
+            --red-soft: rgba(209, 59, 72, 0.1);
+            --red-line: rgba(209, 59, 72, 0.38);
+            --shadow: 0 26px 70px rgba(0, 0, 0, 0.36);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        .header__title {
-            text-align: center;
-            letter-spacing: 0.5vw;
-            word-spacing: 2vw;
-            /* background-color: #2664c7; */
-            background: rgb(9, 9, 121);
-            background: linear-gradient(90deg, rgba(9, 9, 121, 1) 0%, rgba(0, 212, 255, 0.7066176812521884) 64%, rgba(0, 137, 164, 1) 100%);
-            padding: 12px 14px;
-            font-size: 3rem;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .main__list-skill {
-            list-style-type: square;
-            margin-left: 50px;
+        body {
+            min-height: 100vh;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 18% 0%, rgba(209, 59, 72, 0.12), transparent 28rem),
+                radial-gradient(circle at 86% 16%, rgba(255, 255, 255, 0.055), transparent 22rem),
+                linear-gradient(180deg, #0b0b0d 0%, var(--bg) 48%, #0a0a0c 100%);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.5;
         }
 
-        .main__title {
-            border-left: solid 1vw red;
-            padding: 1vw 2vw;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 1vw 0;
+        body::before {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            content: "";
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 92%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .page {
+            width: min(1180px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            border-bottom: 1px solid var(--line);
+            background: rgba(7, 7, 8, 0.82);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 68px;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            min-width: 0;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            padding: 7px 9px 7px 7px;
+            transition: border-color 180ms ease, background 180ms ease;
+        }
+
+        .brand:hover,
+        .brand:focus-visible {
+            border-color: var(--red-line);
+            background: var(--red-soft);
+            outline: none;
+        }
+
+        .brand-mark {
+            position: relative;
+            display: grid;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 auto;
+            overflow: hidden;
+            place-items: center;
+            border: 1px solid var(--red-line);
+            border-radius: 8px;
+            background: linear-gradient(145deg, #251417, #111216 64%);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035), 0 0 24px rgba(209, 59, 72, 0.14);
+        }
+
+        .brand-mark::before {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            content: "";
+            background: linear-gradient(180deg, var(--red), var(--red-dark));
+        }
+
+        .brand-monogram {
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            font-size: 0.76rem;
+            font-weight: 950;
+            letter-spacing: 0;
+        }
+
+        .brand-copy {
+            display: grid;
+            min-width: 0;
+            gap: 3px;
+        }
+
+        .brand-copy strong {
+            color: #ffffff;
+            font-size: 0.92rem;
+            line-height: 1.1;
+        }
+
+        .brand-copy span {
+            color: var(--muted);
+            font-size: 0.68rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: 0;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--muted);
+            font-size: 0.84rem;
+            font-weight: 800;
+        }
+
+        .nav-links a {
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 9px 12px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible,
+        .nav-links .active {
+            color: #ffffff;
+            border-color: var(--red-line);
+            background: var(--red-soft);
+            outline: none;
+        }
+
+        .profile-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            gap: 24px;
+            padding: 32px 0 80px;
+        }
+
+        .profile-main,
+        .profile-sidebar {
+            display: grid;
+            gap: 18px;
+            align-content: start;
+        }
+
+        .profile-card,
+        .panel,
+        .sidebar-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(16, 17, 19, 0.86);
+            box-shadow: var(--shadow);
+        }
+
+        .profile-card {
+            overflow: hidden;
+        }
+
+        .cover {
+            position: relative;
+            min-height: 220px;
+            border-bottom: 1px solid var(--line);
+            background:
+                linear-gradient(125deg, rgba(209, 59, 72, 0.25), transparent 34%),
+                radial-gradient(circle at 72% 32%, rgba(209, 59, 72, 0.2), transparent 18rem),
+                linear-gradient(135deg, #1d1f24 0%, #0b0b0d 58%, #171014 100%);
+        }
+
+        .cover::before {
+            position: absolute;
+            inset: 22px;
+            content: "";
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 36px 36px;
+            opacity: 0.45;
+        }
+
+        .cover-copy {
+            position: absolute;
+            left: 28px;
+            bottom: 28px;
+            display: grid;
+            gap: 10px;
+            max-width: 520px;
+        }
+
+        .cover-label {
+            width: fit-content;
+            border: 1px solid var(--red-line);
+            border-radius: 999px;
+            padding: 7px 11px;
+            color: #f3c7ca;
+            background: rgba(209, 59, 72, 0.08);
+            font-size: 0.78rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .cover-copy h1 {
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 950;
+            line-height: 0.96;
+            letter-spacing: 0;
+        }
+
+        .profile-head {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: end;
+            gap: 18px;
+            padding: 0 28px 24px;
+        }
+
+        .avatar-wrap {
+            position: relative;
+            margin-top: -50px;
+        }
+
+        .avatar {
+            width: 118px;
+            height: 118px;
+            border: 5px solid var(--surface);
+            border-radius: 50%;
+            background: #22252b;
+            object-fit: cover;
+            box-shadow: 0 0 0 1px var(--red-line), 0 16px 44px rgba(0, 0, 0, 0.5);
+        }
+
+        .identity {
+            min-width: 0;
+            padding-top: 22px;
+        }
+
+        .identity h2 {
+            font-size: clamp(1.8rem, 3.4vw, 2.65rem);
+            line-height: 1;
+            letter-spacing: 0;
+        }
+
+        .handle-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 9px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .focus-note {
+            display: inline-grid;
+            gap: 3px;
+            margin-top: 14px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 9px 12px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .focus-note span {
+            color: var(--dim);
+            font-size: 0.68rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .focus-note strong {
+            font-size: 0.82rem;
+            line-height: 1.25;
+        }
+
+        .profile-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 3px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 0 16px;
+            color: #ffffff;
+            font-size: 0.86rem;
+            font-weight: 900;
+            white-space: nowrap;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+        }
+
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            box-shadow: 0 16px 38px rgba(209, 59, 72, 0.24);
+        }
+
+        .button-ghost {
+            border-color: var(--line-strong);
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        .button-ghost:hover,
+        .button-ghost:focus-visible {
+            border-color: var(--red-line);
+            background: var(--red-soft);
+        }
+
+        .bio {
+            padding: 0 28px 28px;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .bio strong {
+            color: #ffffff;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            border-top: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.026);
+        }
+
+        .stat {
+            display: flex;
+            min-height: 116px;
+            flex-direction: column;
+            justify-content: center;
+            padding: 18px 20px;
+            border-right: 1px solid var(--line);
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat strong {
+            display: block;
+            margin-top: 10px;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        .stat span {
+            display: block;
+            color: var(--red);
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 8px;
+            background: rgba(16, 17, 19, 0.68);
+        }
+
+        .tabs button {
+            border: 0;
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: var(--muted);
+            background: transparent;
+            font-size: 0.86rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .tabs button:hover,
+        .tabs button:focus-visible,
+        .tabs button[aria-selected="true"] {
+            color: #ffffff;
+            background: var(--red-soft);
+            outline: none;
+        }
+
+        .tabs button[aria-selected="true"] {
+            box-shadow: inset 0 0 0 1px var(--red-line);
+        }
+
+        .tab-panel[hidden] {
+            display: none;
+        }
+
+        .tab-panel {
+            scroll-margin-top: 92px;
+        }
+
+        .panel,
+        .sidebar-card {
+            padding: 22px;
+        }
+
+        .panel-title,
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .panel-title h2,
+        .sidebar-title h2 {
+            font-size: 1.18rem;
+            line-height: 1.1;
+        }
+
+        .panel-title span,
+        .sidebar-title span {
+            color: var(--dim);
+            font-size: 0.76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .backend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .backend-card {
+            min-height: 126px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 16px;
+            background: var(--surface-2);
+        }
+
+        .backend-card span {
+            display: block;
+            color: var(--red);
+            font-size: 0.76rem;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .backend-card strong {
+            display: block;
+            margin-top: 14px;
+            font-size: 1.05rem;
+            line-height: 1.24;
+        }
+
+        .backend-card p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .skill-points {
+            display: grid;
+            gap: 8px;
+            margin-top: 14px;
+            list-style: none;
+        }
+
+        .skill-points li {
+            position: relative;
+            padding-left: 14px;
+            color: var(--muted);
+            font-size: 0.86rem;
+        }
+
+        .skill-points li::before {
+            position: absolute;
+            top: 0.58em;
+            left: 0;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            content: "";
+            background: var(--red);
+        }
+
+        .feed {
+            display: grid;
+            gap: 12px;
+        }
+
+        .post {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            background: var(--surface-2);
+        }
+
+        .post-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            color: var(--dim);
+            font-size: 0.82rem;
+            font-weight: 850;
+        }
+
+        .post h3 {
+            margin-top: 12px;
+            font-size: 1.28rem;
+            line-height: 1.2;
+        }
+
+        .post p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .purpose-post {
+            position: relative;
+            overflow: hidden;
+            padding: 22px;
+            background:
+                linear-gradient(135deg, rgba(209, 59, 72, 0.1), transparent 46%),
+                var(--surface-2);
+        }
+
+        .purpose-post::before {
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 3px;
+            content: "";
+            background: var(--red);
+        }
+
+        .purpose-post h3 {
+            max-width: 720px;
+            font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+        }
+
+        .purpose-post p {
+            max-width: 760px;
+        }
+
+        .post-tags,
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+            list-style: none;
+        }
+
+        .post-tags li,
+        .skill-list li {
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 999px;
+            padding: 7px 10px;
+            color: #f3c7ca;
+            background: rgba(209, 59, 72, 0.045);
+            font-size: 0.78rem;
+            font-weight: 900;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 210px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 18px;
+            background:
+                linear-gradient(135deg, rgba(209, 59, 72, 0.08), transparent 44%),
+                var(--surface-2);
+        }
+
+        .project-card .project-type {
+            width: fit-content;
+            border: 1px solid var(--red-line);
+            border-radius: 999px;
+            padding: 6px 9px;
+            color: #f3c7ca;
+            background: rgba(209, 59, 72, 0.07);
+            font-size: 0.74rem;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .project-card h3 {
+            margin-top: 18px;
+            font-size: 1.22rem;
+        }
+
+        .project-card p {
+            margin-top: 10px;
+            color: var(--muted);
+        }
+
+        .project-card a {
+            width: fit-content;
+            margin-top: auto;
+            border-bottom: 1px solid var(--red);
+            padding-bottom: 4px;
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .sidebar-card {
+            background: rgba(16, 17, 19, 0.78);
+        }
+
+        .sidebar-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 18px;
+            border-top: 1px solid var(--line);
+            padding-top: 14px;
+            color: #ffffff;
+            font-size: 0.86rem;
+            font-weight: 900;
+        }
+
+        .sidebar-action span:last-child {
+            color: var(--red);
+            font-size: 1.1rem;
+            transition: transform 180ms ease;
+        }
+
+        .sidebar-action:hover span:last-child,
+        .sidebar-action:focus-visible span:last-child {
+            transform: translateX(3px);
+        }
+
+        .sidebar-action:focus-visible {
+            outline: 2px solid var(--red-line);
+            outline-offset: 5px;
+        }
+
+        .quick-list {
+            display: grid;
+            gap: 13px;
+            list-style: none;
+        }
+
+        .quick-list li {
+            display: grid;
+            gap: 4px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 13px;
+        }
+
+        .quick-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .quick-list span {
+            color: var(--dim);
+            font-size: 0.76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .quick-list strong,
+        .quick-list a {
+            color: #ffffff;
+            font-size: 0.98rem;
+        }
+
+        .contact-content {
+            display: grid;
+            gap: 14px;
+        }
+
+        .contact-note {
+            border: 1px solid var(--red-line);
+            border-radius: 8px;
+            padding: 16px;
+            background:
+                radial-gradient(circle at top right, rgba(209, 59, 72, 0.18), transparent 12rem),
+                rgba(209, 59, 72, 0.055);
+        }
+
+        .contact-note strong {
+            display: block;
+            font-size: 1.18rem;
+            line-height: 1.2;
+        }
+
+        .contact-note p {
+            margin-top: 8px;
+            color: var(--muted);
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .contact-links a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.04);
+            font-weight: 850;
+        }
+
+        .contact-links a:hover,
+        .contact-links a:focus-visible {
+            border-color: var(--red-line);
+            outline: none;
+        }
+
+        .contact-links span {
+            color: var(--red);
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 28px 0 42px;
+            color: var(--dim);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 980px) {
+            .profile-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .profile-sidebar .sidebar-card:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page {
+                width: min(100% - 24px, 1180px);
+            }
+
+            .nav {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 14px 0;
+            }
+
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .cover {
+                min-height: 210px;
+            }
+
+            .cover-copy {
+                left: 18px;
+                right: 18px;
+                bottom: 20px;
+            }
+
+            .profile-head {
+                grid-template-columns: 1fr;
+                align-items: start;
+                padding: 0 18px 22px;
+            }
+
+            .focus-note {
+                width: min(100%, 360px);
+            }
+
+            .profile-actions {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .button {
+                flex: 1;
+            }
+
+            .bio {
+                padding: 0 18px 22px;
+            }
+
+            .profile-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .backend-grid,
+            .project-grid,
+            .profile-sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-bottom: 1px solid var(--line);
+            }
+
+            .stat:nth-child(even) {
+                border-right: 0;
+            }
+
+            .stat:nth-last-child(-n+2) {
+                border-bottom: 0;
+            }
+
+            .tab-panel {
+                scroll-margin-top: 150px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .stat {
+                border-right: 0;
+            }
+
+            .stat:nth-last-child(-n+2) {
+                border-bottom: 1px solid var(--line);
+            }
+
+            .stat:last-child {
+                border-bottom: 0;
+            }
+
+            .panel-title,
+            .sidebar-title,
+            .post-head {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="header__title">Welcome to my Website</h1>
+    <header class="topbar">
+        <nav class="page nav" aria-label="Main navigation">
+            <a class="brand" href="#profile" aria-label="Nguyen Duc Trong profile home">
+                <span class="brand-mark" aria-hidden="true">
+                    <span class="brand-monogram">NDT</span>
+                </span>
+                <span class="brand-copy">
+                    <strong>Nguyen Duc Trong</strong>
+                    <span>Java &middot; Node.js &middot; Python</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a class="active" href="#profile" data-tab-link="overview-tab" aria-current="page">Profile</a>
+                <a href="#activity" data-tab-link="activity-tab">Activity</a>
+                <a href="#work" data-tab-link="work-tab">Work</a>
+                <a href="#skills-panel" data-tab-link="skills-tab">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
     </header>
 
-    <main class="main">
-        <p class="main__title">Information</p>
-        <ul>
-            <li>I am Nguyen Duc Trong - web developer</li>
-            <li>My github: <a href="https://github.com/nguyenductrongdev">nguyenductrongdev</a></li>
-        </ul>
+    <main class="page profile-shell" id="profile">
+        <div class="profile-main">
+            <section class="profile-card" aria-labelledby="profile-name">
+                <div class="cover">
+                    <div class="cover-copy">
+                        <span class="cover-label">Reliable systems. Thoughtful growth.</span>
+                        <h1>Backend Developer</h1>
+                    </div>
+                </div>
+                <div class="profile-head">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="https://github.com/nguyenductrongdev.png" alt="Nguyen Duc Trong GitHub avatar">
+                    </div>
+                    <div class="identity">
+                        <h2 id="profile-name">Nguyen Duc Trong</h2>
+                        <div class="handle-row">
+                            <span>@nguyenductrongdev</span>
+                        </div>
+                        <div class="focus-note" aria-label="Current technical direction">
+                            <span>Current direction</span>
+                            <strong>Scalable backend systems &amp; system design</strong>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <a class="button button-primary" href="https://github.com/nguyenductrongdev" target="_blank" rel="noreferrer">View GitHub</a>
+                        <a class="button button-ghost" href="#contact">Contact</a>
+                    </div>
+                </div>
+                <p class="bio">
+                    I build <strong>reliable backend systems</strong> with clear business logic, maintainable structure,
+                    and dependable APIs using Java Spring Boot, Node.js with NestJS or Express.js, and Python.
+                </p>
+                <div class="profile-stats" aria-label="Engineering profile highlights">
+                    <div class="stat">
+                        <span>What I build</span>
+                        <strong>APIs &amp; backend services</strong>
+                    </div>
+                    <div class="stat">
+                        <span>How I think</span>
+                        <strong>Clear logic &amp; clean structure</strong>
+                    </div>
+                    <div class="stat">
+                        <span>What I value</span>
+                        <strong>Reliability &amp; maintainability</strong>
+                    </div>
+                    <div class="stat">
+                        <span>How I grow</span>
+                        <strong>Build, reflect &amp; improve</strong>
+                    </div>
+                </div>
+            </section>
 
+            <div class="tabs" role="tablist" aria-label="Profile sections">
+                <button class="active" id="overview-tab" type="button" role="tab" aria-selected="true" aria-controls="snapshot" data-tab="snapshot">Overview</button>
+                <button id="activity-tab" type="button" role="tab" aria-selected="false" aria-controls="activity" data-tab="activity" tabindex="-1">Activity</button>
+                <button id="work-tab" type="button" role="tab" aria-selected="false" aria-controls="work" data-tab="work" tabindex="-1">Work</button>
+                <button id="skills-tab" type="button" role="tab" aria-selected="false" aria-controls="skills-panel" data-tab="skills-panel" tabindex="-1">Skills</button>
+            </div>
 
+            <section class="panel tab-panel" id="snapshot" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                <div class="panel-title">
+                    <h2 id="snapshot-title">What Drives Me</h2>
+                    <span>Featured post</span>
+                </div>
+                <article class="post purpose-post">
+                    <div class="post-head">
+                        <span>Nguyen Duc Trong posted</span>
+                        <span>Personal note</span>
+                    </div>
+                    <h3>I enjoy turning complex requirements into clear, dependable backend systems.</h3>
+                    <p>Backend work is where I feel most engaged: understanding a problem deeply, turning its rules into clear application logic, and refining the system until it becomes dependable for the people using it.</p>
+                    <p>My direction is to grow from building solid APIs today into designing scalable, resilient systems and taking greater technical ownership over the products I help create.</p>
+                    <ul class="post-tags">
+                        <li>Backend Craft</li>
+                        <li>System Design</li>
+                        <li>Continuous Growth</li>
+                    </ul>
+                </article>
+            </section>
 
-        <p class="main__title">My skills:</p>
-        <ul class="main__list-skill">
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>ReactJS</li>
-            <li>Jquery</li>
-            <li>Bootstrap</li>
-            <li>NodeJS</li>
-            <li>PHP</li>
-            <li>Java</li>
-        </ul>
+            <section class="panel tab-panel" id="activity" role="tabpanel" aria-labelledby="activity-tab" tabindex="0" hidden>
+                <div class="panel-title">
+                    <h2 id="activity-title">Engineering Notes</h2>
+                    <span>Recent focus</span>
+                </div>
+                <div class="feed">
+                    <article class="post">
+                        <div class="post-head">
+                            <span>Nguyen Duc Trong posted</span>
+                            <span>Now</span>
+                        </div>
+                        <h3>Working through backend problems from domain rules to reliable API behavior.</h3>
+                        <p>I enjoy tracing a feature from requirement to data flow, shaping the business logic, and keeping the implementation understandable for the next change.</p>
+                        <ul class="post-tags">
+                            <li>Business Logic</li>
+                            <li>REST APIs</li>
+                            <li>Maintainability</li>
+                        </ul>
+                    </article>
+                    <article class="post">
+                        <div class="post-head">
+                            <span>Current focus</span>
+                            <span>Learning track</span>
+                        </div>
+                        <h3>Deepening Spring Boot, NestJS, Express.js, and Python backend development.</h3>
+                        <p>Practicing API design, request flow, business logic, modular architecture, and maintainable service development.</p>
+                        <ul class="post-tags">
+                            <li>Spring Boot</li>
+                            <li>NestJS</li>
+                            <li>Python</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="panel tab-panel" id="work" role="tabpanel" aria-labelledby="work-tab" tabindex="0" hidden>
+                <div class="panel-title">
+                    <h2 id="work-title">Selected Work</h2>
+                    <span>GitHub highlights</span>
+                </div>
+                <div class="project-grid">
+                    <article class="project-card">
+                        <span class="project-type">Code</span>
+                        <h3>Backend Repositories</h3>
+                        <p>Explore backend projects and experiments across Spring Boot, NestJS, Express.js, and Python.</p>
+                        <a href="https://github.com/nguyenductrongdev" target="_blank" rel="noreferrer">Browse repositories</a>
+                    </article>
+                    <article class="project-card">
+                        <span class="project-type">Profile</span>
+                        <h3>Developer Profile</h3>
+                        <p>The source behind this dark, social-style portfolio and its accessible tab interactions.</p>
+                        <a href="https://github.com/nguyenductrongdev" target="_blank" rel="noreferrer">View source</a>
+                    </article>
+                </div>
+            </section>
+            <section class="panel tab-panel" id="skills-panel" role="tabpanel" aria-labelledby="skills-tab" tabindex="0" hidden>
+                <div class="panel-title">
+                    <h2 id="skills-panel-title">Backend Skills</h2>
+                    <span>Technical overview</span>
+                </div>
+                <div class="backend-grid">
+                    <article class="backend-card">
+                        <span>Java ecosystem</span>
+                        <strong>Java &amp; Spring Boot</strong>
+                        <p>Building structured backend applications around clear business rules and dependable API behavior.</p>
+                        <ul class="skill-points">
+                            <li>REST API design</li>
+                            <li>Layered application structure</li>
+                            <li>Business logic and data flow</li>
+                        </ul>
+                    </article>
+                    <article class="backend-card">
+                        <span>Node.js ecosystem</span>
+                        <strong>NestJS &amp; Express.js</strong>
+                        <p>Working across modular service structure and lightweight, middleware-driven backend applications.</p>
+                        <ul class="skill-points">
+                            <li>NestJS modules and services</li>
+                            <li>Express.js routing and middleware</li>
+                            <li>Request flow and service integration</li>
+                        </ul>
+                    </article>
+                    <article class="backend-card">
+                        <span>Python ecosystem</span>
+                        <strong>Python</strong>
+                        <p>Using Python for backend foundations, practical scripting, and automation-oriented problem solving.</p>
+                        <ul class="skill-points">
+                            <li>Backend application logic</li>
+                            <li>Scripting and automation</li>
+                            <li>Service-oriented foundations</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <aside class="profile-sidebar" aria-label="Profile sidebar">
+            <section class="sidebar-card" id="skills" aria-labelledby="skills-title">
+                <div class="sidebar-title">
+                    <h2 id="skills-title">Core Stack</h2>
+                    <span>Quick view</span>
+                </div>
+                <ul class="skill-list" aria-label="Developer skills">
+                    <li>Java</li>
+                    <li>Spring Boot</li>
+                    <li>Node.js</li>
+                    <li>NestJS</li>
+                    <li>Express.js</li>
+                    <li>Python</li>
+                </ul>
+                <a class="sidebar-action" href="#skills-panel" data-tab-link="skills-tab">
+                    <span>View skill details</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </section>
+
+            <section class="sidebar-card" aria-labelledby="quick-info-title">
+                <div class="sidebar-title">
+                    <h2 id="quick-info-title">Professional Focus</h2>
+                    <span>At a glance</span>
+                </div>
+                <ul class="quick-list">
+                    <li>
+                        <span>Primary focus</span>
+                        <strong>API design, business logic, and backend services</strong>
+                    </li>
+                    <li>
+                        <span>Engineering approach</span>
+                        <strong>Clear structure and maintainable code</strong>
+                    </li>
+                    <li>
+                        <span>Growth direction</span>
+                        <strong>Scalable systems and deeper system design</strong>
+                    </li>
+                    <li>
+                        <span>GitHub</span>
+                        <a href="https://github.com/nguyenductrongdev" target="_blank" rel="noreferrer">github.com/nguyenductrongdev</a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="sidebar-card" id="contact" aria-labelledby="contact-title">
+                <div class="sidebar-title">
+                    <h2 id="contact-title">Contact</h2>
+                    <span>Connect</span>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-note">
+                        <strong>Let us talk about backend engineering and practical software systems.</strong>
+                        <p>I enjoy exchanging ideas about APIs, system design, and building maintainable products.</p>
+                    </div>
+                    <div class="contact-links">
+                        <a href="https://github.com/nguyenductrongdev" target="_blank" rel="noreferrer">GitHub <span>Visit</span></a>
+                        <a href="#profile">Portfolio <span>Top</span></a>
+                    </div>
+                </div>
+            </section>
+        </aside>
     </main>
+
+    <footer class="footer">
+        <div class="page">
+            <p>&copy; 2026 Nguyen Duc Trong. Backend developer profile.</p>
+        </div>
+    </footer>
+
+    <script>
+        const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+        const panels = tabs.map((tab) => document.getElementById(tab.getAttribute('aria-controls')));
+        const navTabLinks = Array.from(document.querySelectorAll('[data-tab-link]'));
+        const topNavLinks = Array.from(document.querySelectorAll('.nav-links a'));
+
+        function setActiveNav(activeLink) {
+            topNavLinks.forEach((link) => {
+                const isActive = link === activeLink;
+                link.classList.toggle('active', isActive);
+
+                if (isActive) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        }
+
+        function activateTab(tab, shouldFocus = false) {
+            tabs.forEach((item) => {
+                const isActive = item === tab;
+                item.setAttribute('aria-selected', String(isActive));
+                item.tabIndex = isActive ? 0 : -1;
+                item.classList.toggle('active', isActive);
+            });
+
+            panels.forEach((panel) => {
+                panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+            });
+
+            const matchingNavLink = topNavLinks.find((link) => link.dataset.tabLink === tab.id);
+            if (matchingNavLink) {
+                setActiveNav(matchingNavLink);
+            }
+
+            if (shouldFocus) {
+                tab.focus();
+            }
+        }
+
+        tabs.forEach((tab, index) => {
+            tab.addEventListener('click', () => activateTab(tab));
+            tab.addEventListener('keydown', (event) => {
+                const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+                if (!keys.includes(event.key)) {
+                    return;
+                }
+
+                event.preventDefault();
+                let nextIndex = index;
+
+                if (event.key === 'ArrowRight') {
+                    nextIndex = (index + 1) % tabs.length;
+                }
+
+                if (event.key === 'ArrowLeft') {
+                    nextIndex = (index - 1 + tabs.length) % tabs.length;
+                }
+
+                if (event.key === 'Home') {
+                    nextIndex = 0;
+                }
+
+                if (event.key === 'End') {
+                    nextIndex = tabs.length - 1;
+                }
+
+                activateTab(tabs[nextIndex], true);
+            });
+        });
+
+        navTabLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                const tab = document.getElementById(link.dataset.tabLink);
+                if (tab) {
+                    activateTab(tab);
+                }
+            });
+        });
+
+        topNavLinks
+            .filter((link) => !link.dataset.tabLink)
+            .forEach((link) => {
+                link.addEventListener('click', () => setActiveNav(link));
+            });
+    </script>
 </body>
 
 </html>
